@@ -48,14 +48,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    // @PatchMapping("/{id}")
-    // public ResponseEntity<UserDto> patchUser(@PathVariable Long id, @RequestBody UpdateUserDto patchUserDto) {
-    //     return ResponseEntity.status(HttpStatus.OK).body(userService.patchUser(id, patchUserDto));
-    // }
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserDto> patchUser(@PathVariable Long id, @RequestBody UpdateUserDto patchUserDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.patchUser(id, patchUserDto));
+    }
 
-    // @PutMapping("/{id}")
-    // public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UpdateUserDto updateUserDto) {
-    //     return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, updateUserDto));
-    // }
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UpdateUserDto updateUserDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, updateUserDto));
+    }
     
 }

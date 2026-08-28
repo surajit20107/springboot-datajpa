@@ -11,6 +11,7 @@ import com.springDataJpa.repository.UserRepository;
 import dto.CreateUserDto;
 import dto.UpdateUserDto;
 import dto.UserDto;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -49,8 +50,27 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    // public UserDto patchUser(Long id, UpdateUserDto patchUserDto) { return null;}
+    @Transactional
+    public UserDto patchUser(Long id, UpdateUserDto patchUserDto) {
+        User user = userRepository.findById(id).orElseThrow();
+        if (patchUserDto.getName() != null) {
+            user.setName(patchUserDto.getName());
+        }
 
-    // public UserDto updateUser(Long id, UpdateUserDto updateUserDto) { return null;}
+        if (patchUserDto.getEmail() != null) {
+            user.setEmail(patchUserDto.getEmail());
+        }
+
+        UserDto userDto =  new UserDto(user.getId(), user.getName(), user.getEmail());
+        return userDto;
+    }
+
+    @Transactional
+    public UserDto updateUser(Long id, UpdateUserDto updateUserDto) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setName(updateUserDto.getName());
+        user.setEmail(updateUserDto.getEmail());
+        return new UserDto(user.getId(), user.getName(), user.getEmail());
+    }
 
 }
