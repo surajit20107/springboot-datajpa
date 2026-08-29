@@ -25,7 +25,7 @@ public class OrderService {
     @Transactional
     public OrderDto createOrder(Long userid, CreateOrderDto createOrderDto) {
         User user = userRepository.findById(userid).orElseThrow(
-            () -> new UserNotFoundException("User with id " + userid + " not found");
+            () -> new UserNotFoundException("User with id " + userid + " not found")
         );
         Order order = new Order();
         order.setUser(user);
