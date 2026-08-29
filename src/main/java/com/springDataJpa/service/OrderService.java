@@ -2,6 +2,7 @@ package com.springDataJpa.service;
 
 import com.springDataJpa.entities.Order;
 import com.springDataJpa.entities.User;
+import com.springDataJpa.exception.UserNotFoundException;
 import com.springDataJpa.repository.OrderRepository;
 import com.springDataJpa.repository.UserRepository;
 import dto.CreateOrderDto;
@@ -23,7 +24,9 @@ public class OrderService {
 
     @Transactional
     public OrderDto createOrder(Long userid, CreateOrderDto createOrderDto) {
-        User user = userRepository.findById(userid).orElseThrow();
+        User user = userRepository.findById(userid).orElseThrow(
+            () -> new UserNotFoundException("User with id " + userid + " not found");
+        );
         Order order = new Order();
         order.setUser(user);
         order.setProductName(createOrderDto.getProductName());

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springDataJpa.entities.User;
+import com.springDataJpa.exception.UserNotFoundException;
 import com.springDataJpa.repository.UserRepository;
 
 import dto.CreateUserDto;
@@ -44,7 +45,9 @@ public class UserService {
     }
 
     public UserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException("User with id " + id + " not found")
+        );
         UserDto userDto = new UserDto(user.getId(), user.getName(), user.getEmail());
         return userDto;
     }
