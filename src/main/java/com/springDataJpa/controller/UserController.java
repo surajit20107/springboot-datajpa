@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springDataJpa.service.UserService;
@@ -37,6 +38,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
     }
 
+    @GetMapping("/paginated")
+    public ResponseEntity<List<UserDto>> getUsersPaginated(
+        @RequestParam int page,
+        @RequestParam int size,
+        @RequestParam(defaultValue = "asc") String direction,
+        @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUsersPaginated(page, size, direction, sortBy));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
@@ -57,5 +68,5 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UpdateUserDto updateUserDto) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, updateUserDto));
     }
-    
+
 }

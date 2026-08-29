@@ -6,6 +6,7 @@ import com.springDataJpa.repository.OrderRepository;
 import com.springDataJpa.repository.UserRepository;
 import dto.CreateOrderDto;
 import dto.OrderDto;
+import dto.UserDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -28,7 +29,9 @@ public class OrderService {
         order.setProductName(createOrderDto.getProductName());
 
         Order createdOrder = orderRepository.save(order);
-        return new OrderDto(createdOrder.getId(), createdOrder.getProductName(), createdOrder.getUser());
+            return new OrderDto(createdOrder.getId(), createdOrder.getProductName(),
+            new UserDto(createdOrder.getUser().getId(), createdOrder.getUser().getName(), createdOrder.getUser().getEmail())
+        );
     }
 
     public List<OrderDto> getOrdersById(Long userId) {
@@ -36,7 +39,9 @@ public class OrderService {
         List<OrderDto> orderDtos = new ArrayList<>();
         
         orders.forEach(order -> {
-            OrderDto orderDto = new OrderDto(order.getId(), order.getProductName(), order.getUser());
+            OrderDto orderDto = new OrderDto(order.getId(), order.getProductName(),
+            new UserDto(order.getUser().getId(), order.getUser().getName(), order.getUser().getEmail())
+        );
             orderDtos.add(orderDto);
         });
 
