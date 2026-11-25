@@ -29,6 +29,7 @@ import lombok.AllArgsConstructor;
 public class UserController {
     private final UserService userService;
 
+
     @PostMapping
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUserDto));
