@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springDataJpa.service.UserService;
 
-import dto.CreateUserDto;
 import dto.UpdateUserDto;
 import dto.UserDto;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -28,12 +26,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService userService;
-
-
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUserDto));
-    }
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
