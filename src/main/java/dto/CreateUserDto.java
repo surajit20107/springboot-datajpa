@@ -18,6 +18,11 @@ public class CreateUserDto {
     @NotBlank
     @NotNull
     @Email
-    @Size(min = 12, max = 50)
+    @Size(min = 12, max = 100)
     private String email;
+
+    @NotBlank
+    @NotNull
+    @Size(min = 8, max = 100)
+    private String password;
 }
