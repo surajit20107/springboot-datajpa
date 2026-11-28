@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.springDataJpa.entities.Role;
 import com.springDataJpa.entities.User;
+import com.springDataJpa.exception.UserNotFoundException;
 
 import dto.CreateUserDto;
 import dto.LoginDto;
@@ -40,11 +41,15 @@ public class AuthService {
     }
 
     public UserLoginResponseDto loginUser(LoginDto loginDto) {
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
-        );
-        String jwtToken = jwtService.generateJwtToken((UserDetails) authentication.getPrincipal());
-        return new UserLoginResponseDto(jwtToken);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+            String jwtToken = jwtService.generateJwtToken((UserDetails) authentication.getPrincipal());
+            return new UserLoginResponseDto(jwtToken);
+        } catch (UserNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
