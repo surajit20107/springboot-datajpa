@@ -9,10 +9,10 @@ import com.springDataJpa.entities.User;
 import com.springDataJpa.exception.UserNotFoundException;
 import com.springDataJpa.repository.UserRepository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
