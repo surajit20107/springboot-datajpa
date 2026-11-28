@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springDataJpa.service.AuthService;
 
 import dto.CreateUserDto;
-import dto.RegisterUserResponseDto;
+import dto.LoginDto;
+import dto.UserLoginResponseDto;
+import dto.UserRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -22,8 +24,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterUserResponseDto> registerUser(@RequestBody CreateUserDto createUserDto) {
+    public ResponseEntity<UserRegisterResponseDto> registerUser(@RequestBody CreateUserDto createUserDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.registerUser(createUserDto));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponseDto> loginUser(@RequestBody LoginDto loginDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(authService.loginUser(loginDto));
     }
 
 }
