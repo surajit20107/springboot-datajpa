@@ -8,13 +8,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.springDataJpa.dto.CreateUserDto;
+import com.springDataJpa.dto.UpdateUserDto;
+import com.springDataJpa.dto.UserDto;
 import com.springDataJpa.entities.User;
 import com.springDataJpa.exception.UserNotFoundException;
 import com.springDataJpa.repository.UserRepository;
 
-import dto.CreateUserDto;
-import dto.UpdateUserDto;
-import dto.UserDto;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 

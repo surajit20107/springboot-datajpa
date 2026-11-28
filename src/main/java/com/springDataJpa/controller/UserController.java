@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springDataJpa.dto.UpdateUserDto;
+import com.springDataJpa.dto.UserDto;
 import com.springDataJpa.service.UserService;
 
-import dto.UpdateUserDto;
-import dto.UserDto;
 import lombok.AllArgsConstructor;
 
 @RestController

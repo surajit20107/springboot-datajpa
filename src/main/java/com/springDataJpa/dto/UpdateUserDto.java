@@ -1,4 +1,4 @@
-package dto;
+package com.springDataJpa.dto;
 
 import lombok.Getter;
 import lombok.Setter;

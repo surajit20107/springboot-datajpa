@@ -1,8 +1,9 @@
 package com.springDataJpa.controller;
 
+import com.springDataJpa.dto.CreateOrderDto;
+import com.springDataJpa.dto.OrderDto;
 import com.springDataJpa.service.OrderService;
-import dto.CreateOrderDto;
-import dto.OrderDto;
+
 import lombok.AllArgsConstructor;
 
 import java.util.List;

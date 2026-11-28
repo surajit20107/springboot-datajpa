@@ -1,4 +1,4 @@
-package dto;
+package com.springDataJpa.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OrderDto {
-    private Long id;
+public class CreateOrderDto {
     private String productName;
-    private UserDto user;
 }

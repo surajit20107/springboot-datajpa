@@ -3,12 +3,12 @@ package com.springDataJpa.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springDataJpa.dto.CreateUserDto;
+import com.springDataJpa.dto.LoginDto;
+import com.springDataJpa.dto.UserLoginResponseDto;
+import com.springDataJpa.dto.UserRegisterResponseDto;
 import com.springDataJpa.service.AuthService;
 
-import dto.CreateUserDto;
-import dto.LoginDto;
-import dto.UserLoginResponseDto;
-import dto.UserRegisterResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
