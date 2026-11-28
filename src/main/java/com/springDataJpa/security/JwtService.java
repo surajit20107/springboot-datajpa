@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -22,6 +24,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }
 
+    // generate jwt token
     public String generateJwtToken(UserDetails userDetails) {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
@@ -29,5 +32,14 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                 .signWith(getSecretKey())
                 .compact();
+    }
+
+    // parse jwt token
+    public Claims parseToken(String token) {
+        return Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }
