@@ -4,7 +4,6 @@ import com.springDataJpa.repository.UserRepository;
 import com.springDataJpa.security.JwtService;
 
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.springDataJpa.entities.Role;
 import com.springDataJpa.entities.User;
-import com.springDataJpa.exception.UserNotFoundException;
 
 import dto.CreateUserDto;
 import dto.LoginDto;
@@ -42,14 +40,8 @@ public class AuthService {
     }
 
     public UserLoginResponseDto loginUser(LoginDto loginDto) {
-        Authentication authentication;
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
-            
-        } catch (UserNotFoundException e) {
-            throw new BadCredentialsException("Invalid email or password");
-        }
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+
         String jwtToken = jwtService.generateJwtToken((UserDetails) authentication.getPrincipal());
         return new UserLoginResponseDto(jwtToken);
     }
